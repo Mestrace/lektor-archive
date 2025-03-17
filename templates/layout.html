@@ -8,11 +8,9 @@
     <h1>Watermelon's Communication Archives</h1>
     <nav>
       <ul class="nav navbar-nav">
-        <li{% if this._path=='/' %} class="active" {% endif %}><a href="{{ '/'|url }}">Home</a></li>
-          <li{% if this._path=='/browse' %} class="active" {% endif %}><a href="{{ '/browse'|url }}">Browse</a></li>
-            <li{% if this._path=='/map' %} class="active" {% endif %}><a href="{{ '/map'|url }}">Map</a></li>
-              <li{% if this._path=='/timeline' %} class="active" {% endif %}><a
-                  href="{{ '/timeline'|url }}">Timeline</a></li>
+        {% for path, label in bag('main-nav').items() %}
+        <li{% if this._path==path %} class="active" {% endif %}><a href="{{ path|url }}">{{ label }}</a></li>
+          {% endfor %}
       </ul>
     </nav>
   </header>
