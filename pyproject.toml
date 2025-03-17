@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "watermelon-comms"
+version = "0.1.0"
+description = ""
+authors = ["Mestrace <yxl1372@case.edu>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+lektor = "^3.3.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
