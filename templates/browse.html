@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% from "_macros.html" import communication_card %}
+{% block title %}{{ this.title }}{% endblock %}
+{% block body %}
+<div class="browse-header">
+    <h2>{{ this.title }}</h2>
+    <div class="browse-intro">{{ this.body }}</div>
+    <div class="browse-filters">
+        <div class="search-sort-container">
+            <input type="text" id="search-filter" placeholder="Search communications..." class="search-input">
+            <select id="sort-dropdown" class="sort-dropdown">
+                <option value="title">Sort by Title</option>
+                <option value="date">Sort by Date</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="browse-container">
+    {% set communications = bag('communications').entries %}
+    {% for entry in communications %}
+    {{ communication_card(entry) }}
+    {% endfor %}
+</div>
+
+<script>
+    // Filter and sort functionality
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('search-filter');
+        const sortDropdown = document.getElementById('sort-dropdown');
+        const cards = document.querySelectorAll('.communication-card');
+        const cardsContainer = document.querySelector('.browse-container');
+
+        // Function to sort cards
+        function sortCards(sortBy) {
+            const cardsArray = Array.from(cards);
+
+            if (sortBy === 'title') {
+                cardsArray.sort((a, b) => {
+                    const titleA = a.querySelector('h3').textContent.toLowerCase();
+                    const titleB = b.querySelector('h3').textContent.toLowerCase();
+                    return titleA.localeCompare(titleB);
+                });
+            } else if (sortBy === 'date') {
+                cardsArray.sort((a, b) => {
+                    const dateA = a.getAttribute('data-date');
+                    const dateB = b.getAttribute('data-date');
+                    return dateA.localeCompare(dateB);
+                });
+            }
+
+            // Re-append cards in sorted order
+            if (sortBy !== 'none') {
+                cardsArray.forEach(card => {
+                    cardsContainer.appendChild(card);
+                });
+            }
+        }
+
+        // Sort dropdown change event
+        sortDropdown.addEventListener('change', function () {
+            sortCards(this.value);
+        });
+
+        // Search filter
+        searchInput.addEventListener('input', function () {
+            const searchTerm = this.value.toLowerCase();
+
+            cards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('.description').textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

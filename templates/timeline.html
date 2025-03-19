@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% from "_macros.html" import communication_card %}
+{% block title %}{{ this.title }}{% endblock %}
+{% block body %}
+<h2>{{ this.title }}</h2>
+{{ this.body }}
+
+<div class="timeline-container">
+    {% set communications = bag('communications').entries|sort(attribute='date') %}
+    {% set years = {} %}
+
+    {# Group communications by year #}
+    {% for entry in communications %}
+    {% set year = entry.date.split('-')[0] %}
+    {% if year not in years %}
+    {% set _ = years.update({year: []}) %}
+    {% endif %}
+    {% set _ = years[year].append(entry) %}
+    {% endfor %}
+
+    {# Display communications grouped by year #}
+    {% for year, entries in years|dictsort %}
+    <div class="year-group">
+        <h3 class="year-heading">{{ year }}</h3>
+        <div class="timeline-cards">
+            {% for entry in entries %}
+            {{ communication_card(entry) }}
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

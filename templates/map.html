@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}{{ this.title }}{% endblock %}
+{% block body %}
+<h2>{{ this.title }}</h2>
+{{ this.body }}
+
+<div class="map-container">
+    <div id="map" style="height: 500px;"></div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var map = L.map('map').setView([0, 0], 2);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        {% set communications = bag('communications').entries %}
+        {% for entry in communications %}
+        L.marker([{{ entry.latitude }}, {{ entry.longitude }}])
+        .addTo(map)
+        .bindPopup('<h3>{{ entry.title }}</h3><p>{{ entry.date }}</p><p>{{ entry.description }}</p>');
+    {% endfor %}
+    });
+</script>
+{% endblock %}

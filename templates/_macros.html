@@ -1,0 +1,16 @@
+{% macro communication_card(entry) %}
+<div class="communication-card" data-date="{{ entry.date }}">
+    <div class="card-image">
+        <img src="{{ entry.image|url }}" alt="{{ entry.title }}">
+    </div>
+    <div class="card-content">
+        <h3>{{ entry.title }}</h3>
+        <p class="date">{{ entry.date }}</p>
+        <p class="description">{{ entry.description }}</p>
+        <div class="card-footer">
+            <span class="location-tag">Location: {{ entry.latitude }}, {{ entry.longitude }}</span>
+            <button class="view-details-btn">View Details</button>
+        </div>
+    </div>
+</div>
+{% endmacro %}
