@@ -23,7 +23,14 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
-    max-width: 1200px;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 1800px;
+    /* Increased from 1200px to use more screen space */
     margin: 0 auto;
     padding: 0 20px;
 }
