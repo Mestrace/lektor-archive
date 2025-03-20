@@ -6,12 +6,13 @@
 {{ this.body }}
 
 <div class="timeline-container">
-    {% set communications = bag('communications').entries|sort(attribute='date') %}
+    {% set communications = site.get('/collection/').children|sort(attribute='date') %}
+
     {% set years = {} %}
 
     {# Group communications by year #}
     {% for entry in communications %}
-    {% set year = entry.date.split('-')[0] %}
+    {% set year = entry.date.year %}
     {% if year not in years %}
     {% set _ = years.update({year: []}) %}
     {% endif %}

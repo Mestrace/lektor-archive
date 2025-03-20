@@ -1,13 +1,14 @@
 {% extends "layout.html" %}
 {% from "_macros.html" import communication_card %}
-{% block title %}{{ this.title }}{% endblock %}
+{% block title %}Collection{% endblock %}
 {% block body %}
+<h1>Browse</h1>
 <div class="browse-header">
     <h2>{{ this.title }}</h2>
     <div class="browse-intro">{{ this.body }}</div>
     <div class="browse-filters">
         <div class="search-sort-container">
-            <input type="text" id="search-filter" placeholder="Search communications..." class="search-input">
+            <input type="text" id="search-filter" placeholder="Enter keywords..." class="search-input">
             <select id="sort-dropdown" class="sort-dropdown">
                 <option value="title">Sort by Title</option>
                 <option value="date">Sort by Date</option>
@@ -17,8 +18,7 @@
 </div>
 
 <div class="browse-container">
-    {% set communications = bag('communications').entries %}
-    {% for entry in communications %}
+    {% for entry in this.children %}
     {{ communication_card(entry) }}
     {% endfor %}
 </div>

@@ -1,7 +1,12 @@
 {% macro communication_card(entry) %}
 <div class="communication-card" data-date="{{ entry.date }}">
     <div class="card-image">
-        <img src="{{ entry.image|url }}" alt="{{ entry.title }}">
+        {% set images = entry.attachments.images.all() %}
+        {% if images %}
+        <img src="{{ images[0].thumbnail(640)|url }}" alt="{{ entry.title }}">
+        {% else %}
+        <img src="{{ '/static/images/default-image.jpg'|asseturl }}" alt="Default Image">
+        {% endif %}
     </div>
     <div class="card-content">
         <h3>{{ entry.title }}</h3>
@@ -9,7 +14,8 @@
         <p class="description">{{ entry.description }}</p>
         <div class="card-footer">
             <span class="location-tag">Location: {{ entry.latitude }}, {{ entry.longitude }}</span>
-            <button class="view-details-btn">View Details</button>
+            <button class="view-details-btn" onclick="window.location.href='{{ entry._path|url }}'">View
+                Details</button>
         </div>
     </div>
 </div>

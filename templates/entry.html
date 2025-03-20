@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+{% block title %}{{ this.name }} ({{ this.date.year }}){% endblock %}
+{% block body %}
+<!-- Breadcrumb navigation -->
+<nav class="breadcrumb">
+    <ol>
+        <li><a href="{{ '/'|url }}">Home</a></li>
+        <li><a href="{{ '/collection'|url }}">Collection</a></li>
+        <li class="active">{{ this.title }}</li>
+    </ol>
+</nav>
+
+{% set images = this.attachments.images.all() %}
+{% if images %}
+<div class="image-gallery">
+    <div class="gallery-container">
+        <div class="main-image">
+            <img id="current-image" src="{{ images[0].thumbnail(450)|url }}" alt="{{ this.name }}">
+            {% if images[0].exif %}
+            <p class="meta">
+                {{ images[0].exif.camera }}
+                {% if images[0].exif.created_at %}
+                ({{ images[0].exif.created_at|dateformat }})
+                {% endif %}
+            </p>
+            {% endif %}
+        </div>
+
+        {% if images|length > 1 %}
+        <div class="gallery-controls">
+            <button class="gallery-nav prev" onclick="changeImage(-1)">&#10094;</button>
+            <button class="gallery-nav next" onclick="changeImage(1)">&#10095;</button>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if images|length > 1 %}
+    <div class="thumbnails">
+        {% for image in images %}
+        <div class="thumbnail{% if loop.first %} active{% endif %}" onclick="showImage({{ loop.index0 }})">
+            <img src="{{ image.thumbnail(150)|url }}" alt="Thumbnail">
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+<script>
+    // Image gallery functionality
+    const images = [
+        {% for image in images %}
+    {
+        src: "{{ image.thumbnail(450)|url }}",
+            {% if image.exif %}
+    meta: "{{ image.exif.camera }}{% if image.exif.created_at %} ({{ image.exif.created_at|dateformat }}){% endif %}"
+    {% else %}
+    meta: ""
+    {% endif %}
+        }{% if not loop.last %}, {% endif %}
+    {% endfor %}
+    ];
+
+    let currentIndex = 0;
+
+    function showImage(index) {
+        if (index >= 0 && index < images.length) {
+            currentIndex = index;
+            document.getElementById('current-image').src = images[index].src;
+
+            // Update meta information
+            const metaElement = document.querySelector('.main-image .meta');
+            if (metaElement && images[index].meta) {
+                metaElement.innerHTML = images[index].meta;
+            } else if (metaElement) {
+                metaElement.innerHTML = '';
+            }
+
+            // Update active thumbnail
+            document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
+                if (i === index) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        }
+    }
+
+    function changeImage(step) {
+        let newIndex = currentIndex + step;
+        if (newIndex < 0) newIndex = images.length - 1;
+        if (newIndex >= images.length) newIndex = 0;
+        showImage(newIndex);
+    }
+</script>
+{% endif %}
+<h1>{{ this.title }}</h1>
+<dl>
+    <dt>Date
+    <dd>{{ this.date|dateformat }}
+</dl>
+<h2>Description</h2>
+<div class="description">{{ this.description }}</div>
+
+{% endblock %}
