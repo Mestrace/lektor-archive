@@ -1,0 +1,36 @@
+# Build output
+build/
+output/
+
+# Lektor cache
+.cache/
+.lektor/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Poetry local configuration
+.python-version
+
+# Distribution / packaging
+dist/
+*.egg-info/

@@ -13,8 +13,6 @@ A modern, elegant web archive and exhibition platform built with Lektor CMS. Des
 - **Responsive Design** - Beautiful presentation on all devices
 - **Easy Content Management** - Simple content creation with Lektor's intuitive admin interface
 
-## Getting Started
-
 ## Content Structure
 
 - `/content` - All your archive content
