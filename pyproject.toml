@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "watermelon-comms"
+name = "lektor-archive"
 version = "0.1.0"
 description = ""
 authors = ["Mestrace <yxl1372@case.edu>"]
