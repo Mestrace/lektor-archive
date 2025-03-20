@@ -442,6 +442,59 @@ footer {
     object-fit: cover;
 }
 
+/* Entry styling */
+.entry-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.entry-header {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.entry-title {
+    margin-bottom: 10px;
+    font-size: 2.2rem;
+    color: #333;
+}
+
+.entry-meta {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.entry-meta span {
+    margin-right: 20px;
+    display: inline-block;
+}
+
+.entry-meta i {
+    margin-right: 5px;
+}
+
+.entry-description {
+    margin-bottom: 30px;
+}
+
+.entry-description h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.description-content {
+    line-height: 1.6;
+}
+
+.entry-map h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #444;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     header h1 {

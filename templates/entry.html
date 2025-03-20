@@ -94,12 +94,49 @@
     }
 </script>
 {% endif %}
-<h1>{{ this.title }}</h1>
-<dl>
-    <dt>Date
-    <dd>{{ this.date|dateformat }}
-</dl>
-<h2>Description</h2>
-<div class="description">{{ this.description }}</div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+<div class="entry-container">
+    <header class="entry-header">
+        <h1 class="entry-title">{{ this.title }}</h1>
+        <div class="entry-meta">
+            <span class="entry-date"><i class="fa fa-calendar"></i> {{ this.date|dateformat }}</span>
+            {% if this.longitude and this.latitude %}
+            <span class="entry-location"><i class="fa fa-map-marker"></i> {{ this.latitude }}, {{ this.longitude
+                }}</span>
+            {% endif %}
+        </div>
+    </header>
+
+    {% if this.description %}
+    <div class="entry-description">
+        <h2>Description</h2>
+        <div class="description-content">{{ this.description }}</div>
+    </div>
+    {% endif %}
+
+    {% if this.longitude and this.latitude %}
+    <div class="entry-map">
+        <h2>Location</h2>
+        <div id="map" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Initialize the map (using Leaflet as an example)
+            var map = L.map('map').setView([{{ this.latitude }}, {{ this.longitude }}], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        L.marker([{{ this.latitude }}, {{ this.longitude }}]).addTo(map);
+    });
+    </script>
+    {% endif %}
+</div>
 
 {% endblock %}
