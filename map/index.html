@@ -1,0 +1,136 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../static/style.css">
+<title> — Lektor Archives</title>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Lektor Archives</h1>
+      <nav>
+        <ul class="nav navbar-nav">
+          
+          <li><a href="../">Home</a></li>
+            
+          <li><a href="../collection/">Collection</a></li>
+            
+          <li class="active" ><a href="./">Map</a></li>
+            
+          <li><a href="../timeline/">Timeline</a></li>
+            
+          <li><a href="../about/">About</a></li>
+            
+        </ul>
+      </nav>
+    </header>
+    <div class="page">
+      
+<h2></h2>
+<p>This is the Map page for Lektor Archives. Here you can view a geographical representation of our communications.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.</p>
+
+
+<div class="map-container">
+    <div id="map" style="height: 500px;"></div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var map = L.map('map').setView([0, 0], 2);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        
+        
+        var marker = L.marker([47.7229, -122.203362]).addTo(map);
+    marker.bindPopup(
+        "<div class='popup-content'>" +
+        "<h3>No-Image-Example</h3>" +
+        "<p>2024-05-22</p>" +
+        "<div><p>No Image Example</p></div>" +
+        "</div>"
+    );
+    marker.on('click', function () {
+        this.openPopup();
+    });
+
+    
+        var marker = L.marker([48.8566, 2.3522]).addTo(map);
+    marker.bindPopup(
+        "<div class='popup-content'>" +
+        "<h3>Diplomatic Summit</h3>" +
+        "<p>2023-02-18</p>" +
+        "<div><p>Leaders from both species meet to discuss future relations.</p></div>" +
+        "</div>"
+    );
+    marker.on('click', function () {
+        this.openPopup();
+    });
+
+    
+        var marker = L.marker([35.6762, 139.6503]).addTo(map);
+    marker.bindPopup(
+        "<div class='popup-content'>" +
+        "<h3>Trade Agreement</h3>" +
+        "<p>2022-09-05</p>" +
+        "<div><p>Establishing protocols for resource exchange.</p></div>" +
+        "</div>"
+    );
+    marker.on('click', function () {
+        this.openPopup();
+    });
+
+    
+        var marker = L.marker([51.5074, -0.1278]).addTo(map);
+    marker.bindPopup(
+        "<div class='popup-content'>" +
+        "<h3>Scientific Collaboration</h3>" +
+        "<p>2022-03-10</p>" +
+        "<div><p>Joint research on sustainable agriculture techniques.</p></div>" +
+        "</div>"
+    );
+    marker.on('click', function () {
+        this.openPopup();
+    });
+
+    
+        var marker = L.marker([40.7128, -74.006]).addTo(map);
+    marker.bindPopup(
+        "<div class='popup-content'>" +
+        "<h3>Cultural Exchange</h3>" +
+        "<p>2021-11-22</p>" +
+        "<div><p>Sharing Earth's music with civilization.</p></div>" +
+        "</div>"
+    );
+    marker.on('click', function () {
+        this.openPopup();
+    });
+
+    
+        var marker = L.marker([37.7749, -122.4194]).addTo(map);
+    marker.bindPopup(
+        "<div class='popup-content'>" +
+        "<h3>First Contact</h3>" +
+        "<p>2021-06-15</p>" +
+        "<div><p>Our first communication with species.</p></div>" +
+        "</div>"
+    );
+    marker.on('click', function () {
+        this.openPopup();
+    });
+
+    
+    });
+</script>
+
+    </div>
+    <footer>
+      &copy; Copyright 2025 by Mestrace.
+    </footer>
+  </div>
+</body>

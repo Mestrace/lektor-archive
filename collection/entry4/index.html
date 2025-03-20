@@ -1,0 +1,150 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../../static/style.css">
+<title> (2022) — Lektor Archives</title>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Lektor Archives</h1>
+      <nav>
+        <ul class="nav navbar-nav">
+          
+          <li><a href="../../">Home</a></li>
+            
+          <li><a href="../">Collection</a></li>
+            
+          <li><a href="../../map/">Map</a></li>
+            
+          <li><a href="../../timeline/">Timeline</a></li>
+            
+          <li><a href="../../about/">About</a></li>
+            
+        </ul>
+      </nav>
+    </header>
+    <div class="page">
+      
+<!-- Breadcrumb navigation -->
+<nav class="breadcrumb">
+    <ol>
+        <li><a href="../../">Home</a></li>
+        <li><a href="../">Collection</a></li>
+        <li class="active">Trade Agreement</li>
+    </ol>
+</nav>
+
+
+
+<div class="image-gallery">
+    <div class="gallery-container">
+        <div class="main-image">
+            <img id="current-image" src="comm4.svg" alt="">
+            
+        </div>
+
+        
+    </div>
+
+    
+</div>
+
+<script>
+    // Image gallery functionality
+    const images = [
+        
+    {
+        src: "comm4.svg",
+            
+    meta: ""
+    
+        }
+    
+    ];
+
+    let currentIndex = 0;
+
+    function showImage(index) {
+        if (index >= 0 && index < images.length) {
+            currentIndex = index;
+            document.getElementById('current-image').src = images[index].src;
+
+            // Update meta information
+            const metaElement = document.querySelector('.main-image .meta');
+            if (metaElement && images[index].meta) {
+                metaElement.innerHTML = images[index].meta;
+            } else if (metaElement) {
+                metaElement.innerHTML = '';
+            }
+
+            // Update active thumbnail
+            document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
+                if (i === index) {
+                    thumb.classList.add('active');
+                } else {
+                    thumb.classList.remove('active');
+                }
+            });
+        }
+    }
+
+    function changeImage(step) {
+        let newIndex = currentIndex + step;
+        if (newIndex < 0) newIndex = images.length - 1;
+        if (newIndex >= images.length) newIndex = 0;
+        showImage(newIndex);
+    }
+</script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+<div class="entry-container">
+    <header class="entry-header">
+        <h1 class="entry-title">Trade Agreement</h1>
+        <div class="entry-meta">
+            <span class="entry-date"><i class="fa fa-calendar"></i> Sep 5, 2022</span>
+            
+            <span class="entry-location"><i class="fa fa-map-marker"></i> 35.6762, 139.6503</span>
+            
+        </div>
+    </header>
+
+    
+    <div class="entry-description">
+        <h2>Description</h2>
+        <div class="description-content"><p>Establishing protocols for resource exchange.</p>
+</div>
+    </div>
+    
+
+    
+    <div class="entry-map">
+        <h2>Location</h2>
+        <div id="map" style="height: 300px; width: 100%; margin-top: 15px;"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Initialize the map (using Leaflet as an example)
+            var map = L.map('map').setView([35.6762, 139.6503], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        L.marker([35.6762, 139.6503]).addTo(map);
+    });
+    </script>
+    
+</div>
+
+
+    </div>
+    <footer>
+      &copy; Copyright 2025 by Mestrace.
+    </footer>
+  </div>
+</body>
